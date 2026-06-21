@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatWallet | O Futuro do Controle Financeiro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #070B14;
+            --surface: #111827;
+            --surface-hover: #1F2937;
+            --primary: #3B82F6;
+            --primary-glow: rgba(59, 130, 246, 0.4);
+            --accent: #10B981;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border: #1E293B;
+            --whatsapp-bg: #EFEAE2;
+            --whatsapp-user: #D9FDD3;
+            --whatsapp-bot: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* HEADER & NAVBAR */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(7, 11, 20, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(to right, #3B82F6, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px var(--primary-glow);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--primary-glow);
+            background: #2563EB;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--surface-hover);
+            box-shadow: none;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 140px 20px 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1.5px;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .trust-badges span {
+            font-size: 14px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* SMARTPHONE BASE MOCKUP */
+        .mockup-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Flutuação suave para o Hero e Mockups */
+        .mockup-hero { animation: floatPhone 6s ease-in-out infinite; }
+        
+        .phone-inner {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .phone {
+            width: 320px;
+            height: 650px;
+            background: var(--whatsapp-bg);
+            border-radius: 40px;
+            border: 8px solid #1E293B;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 0 0 4px #000;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-header {
+            background: #075E54;
+            color: white;
+            padding: 40px 20px 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phone-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 25px;
+            background: black;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        .chat-area {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        /* ANIMAÇÃO DE CHAT BUBBLES */
+        .bubble {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #111;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .bubble.user {
+            background: var(--whatsapp-user);
+            align-self: flex-end;
+            border-top-right-radius: 5px;
+        }
+
+        .bubble.bot {
+            background: var(--whatsapp-bot);
+            align-self: flex-start;
+            border-top-left-radius: 5px;
+        }
+
+        /* As mensagens só animam quando a seção (.reveal.active) entra na tela */
+        .reveal.active .bubble {
+            animation: chatBounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Delays para parecer que estão conversando */
+        .reveal.active .d-1 { animation-delay: 0.5s; }
+        .reveal.active .d-2 { animation-delay: 1.8s; }
+        .reveal.active .d-3 { animation-delay: 3.2s; }
+        .reveal.active .d-4 { animation-delay: 4.8s; }
+
+        @keyframes chatBounceIn {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Elementos Especiais no Chat (Áudio e Imagem) */
+        .audio-message {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 200px;
+        }
+        .audio-play {
+            width: 35px;
+            height: 35px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .audio-wave {
+            flex-grow: 1;
+            height: 4px;
+            background: #cbd5e1;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Animação da barra de áudio (opcional) */
+        .reveal.active .audio-wave::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: #25D366;
+            border-radius: 2px;
+            animation: playAudio 1.3s linear forwards 0.5s; /* Toca junto com a msg do user */
+        }
+        @keyframes playAudio { to { width: 100%; } }
+
+        .image-message {
+            width: 200px;
+            height: 120px;
+            background: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=300&q=80') center/cover;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-end;
+            padding: 8px;
+            color: white;
+            font-size: 11px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* SECTIONS GENERAL */
+        .section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        /* GRID SHOWCASE (3 PHONES) COM MOVIMENTOS */
+        .phones-showcase {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .phones-showcase .phone-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        /* Cada container flutua em um ritmo diferente */
+        .phones-showcase .phone-wrapper:nth-child(1) { animation: floatPhone 6s ease-in-out infinite 0s; }
+        .phones-showcase .phone-wrapper:nth-child(2) { animation: floatPhone 6s ease-in-out infinite 2s; }
+        .phones-showcase .phone-wrapper:nth-child(3) { animation: floatPhone 6s ease-in-out infinite 4s; }
+
+        @keyframes floatPhone {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Efeito Hover: O celular salta pra frente e brilha */
+        .phones-showcase .phone-wrapper .phone-inner:hover .phone {
+            transform: scale(1.03) translateY(-10px);
+            box-shadow: 0 30px 60px rgba(59, 130, 246, 0.25), inset 0 0 0 4px #000;
+            border-color: rgba(59, 130, 246, 0.8);
+        }
+
+        .phone-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            background: var(--surface);
+            padding: 10px 24px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            z-index: 10;
+        }
+
+        /* FEATURES CARDS */
+        .grid-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 24px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 24px;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* DEPOIMENTOS */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 20px;
+        }
+        
+        .stars { color: #FBBF24; margin-bottom: 15px; font-size: 18px; }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* FAQ EXPANSÍVEL */
+        .faq-container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .faq-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            margin-bottom: 15px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 24px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-bottom: 24px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+            color: var(--primary);
+        }
+
+        .faq-icon {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 60px;
+        }
+
+        /* ANIMATION CLASSES FOR SCROLL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 992px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 120px; }
+            .hero-content h1 { font-size: 3rem; }
+            .hero-content p { margin: 0 auto 30px; }
+            .trust-badges { justify-content: center; }
+            .mockup-container { margin-top: 40px; }
+            .nav-links { display: none; }
+            .phones-showcase .phone { transform: scale(0.9); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">ChatWallet</div>
+            <nav class="nav-links">
+                <a href="#pratica">Como Funciona</a>
+                <a href="#recursos">Recursos</a>
+                <a href="#depoimentos">Depoimentos</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <a href="https://wa.me/5599999999999" class="btn">Acessar App</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content reveal">
+            <h1>Inteligência Financeira no seu WhatsApp.</h1>
+            <p>Esqueça planilhas complexas. Registre gastos por texto, áudio ou <b>fotos de recibos</b>. Crie metas e receba insights financeiros conversando com nossa IA no aplicativo que você já usa.</p>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: flex-start;">
+                <a href="https://wa.me/5599999999999" class="btn">Começar Gratuitamente</a>
+                <a href="#pratica" class="btn btn-outline">Ver na prática</a>
+            </div>
+            <div class="trust-badges">
+                <span>🛡️ Criptografia Ponta a Ponta</span>
+                <span>⚡ Setup em 30 segundos</span>
+            </div>
+        </div>
+
+        <div class="mockup-container mockup-hero reveal">
+            <div class="phone-inner">
+                <div class="phone">
+                    <div class="phone-header">
+                        <div style="width: 35px; height: 35px; background: #fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; color:#075E54; font-weight:bold; font-size: 18px;">C</div>
+                        ChatWallet IA
+                    </div>
+                    <div class="chat-area">
+                        <div class="bubble bot d-1">Olá! Eu sou o ChatWallet. Posso ajudar você a organizar suas finanças hoje? 💸</div>
+                        <div class="bubble user d-2">Qual meu saldo atual?</div>
+                        <div class="bubble bot d-3">
+                            Seu saldo disponível para este mês é de <b>R$ 2.450,00</b>.<br><br>
+                            Você gastou apenas 40% da sua meta de gastos livres. Quer que eu gere um relatório em PDF?
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO: 3 MOCKUPS COM ANIMAÇÕES INDEPENDENTES E EFEITOS DE HOVER -->
+    <section class="section" id="pratica" style="background: rgba(17, 24, 39, 0.5);">
+        <div class="section-header reveal">
+            <h2 class="title">Tão simples quanto mandar mensagem</h2>
+            <p class="subtitle">Veja como nossa Inteligência Artificial entende qualquer formato instantaneamente.</p>
+        </div>
+
+        <div class="phones-showcase reveal">
+            
+            <!-- Mockup 1: Áudio -->
+            <div class="phone-wrapper">
+                <div class="phone-label">🎙️ Por Áudio</div>
+                <div class="phone-inner">
+                    <div class="phone">
+                        <div class="phone-header">ChatWallet IA</div>
+                        <div class="chat-area">
+                            <div class="bubble user d-1">
+                                <div class="audio-message">
+                                    <div class="audio-play">▶</div>
+                                    <div class="audio-wave"></div>
+                                    <span style="font-size: 11px;">0:08</span>
+                                </div>
+                            </div>
+                            <div class="bubble bot d-2">
+                                🎙️ <i>"Abasteci 150 reais no posto Ipiranga."</i><br><br>
+                                Anotado! 🚗<br>
+                                ✅ <b>R$ 150,00</b> registrado em <b>Transporte / Combustível</b>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockup 2: Imagem/Recibo (Destaque Central) -->
+            <div class="phone-wrapper">
+                <div class="phone-label" style="background: var(--primary); color: white; border:none;">📸 Por Foto do Recibo</div>
+                <div class="phone-inner">
+                    <div class="phone" style="z-index: 10;">
+                        <div class="phone-header">ChatWallet IA</div>
+                        <div class="chat-area">
+                            <div class="bubble user d-1" style="padding: 5px;">
+                                <div class="image-message">Recibo Supermercado</div>
+                            </div>
+                            <div class="bubble bot d-2">
+                                📸 Leitura concluída!<br><br>
+                                Valor: <b>R$ 345,90</b><br>
+                                Local: <b>Carrefour</b><br>
+                                Categoria: <b>Mercado</b> 🛒<br><br>
+                                📊 Alerta: Você atingiu 85% da meta de compras deste mês.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockup 3: Texto -->
+            <div class="phone-wrapper">
+                <div class="phone-label">✍️ Por Texto</div>
+                <div class="phone-inner">
+                    <div class="phone">
+                        <div class="phone-header">ChatWallet IA</div>
+                        <div class="chat-area">
+                            <div class="bubble user d-1">Assinei a Netflix por 39,90</div>
+                            <div class="bubble bot d-2">
+                                Feito! 🍿<br>
+                                ✅ <b>R$ 39,90</b> registrado em <b>Assinaturas / Lazer</b>.
+                            </div>
+                            <div class="bubble user d-3">Crie um lembrete para pagar todo dia 15</div>
+                            <div class="bubble bot d-4">
+                                Lembrete criado! ⏰<br>
+                                Vou te avisar todo dia 15 sobre o pagamento da Netflix.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="recursos">
+        <div class="section-header reveal">
+            <h2 class="title">Recursos Nível Premium</h2>
+            <p class="subtitle">O poder de um aplicativo de gestão financeira completo, sem precisar baixar nada.</p>
+        </div>
+
+        <div class="grid-features">
+            <div class="feature-card reveal">
+                <div class="feature-icon">📸</div>
+                <h3>Leitura de Recibos</h3>
+                <p>Tirou foto da nota fiscal? Envie no chat e nossa IA extrai o valor, o estabelecimento e a categoria automaticamente para você.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">🎙️</div>
+                <h3>Reconhecimento de Áudio</h3>
+                <p>Está na rua com pressa? Mande um áudio dizendo "gastei 50 de gasolina" e nossa IA transcreve e registra na hora.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">📊</div>
+                <h3>Dashboards em PDF</h3>
+                <p>Peça o seu resumo mensal e receba no mesmo instante um PDF lindo e detalhado com gráficos de para onde o seu dinheiro foi.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">🎯</div>
+                <h3>Alertas de Metas</h3>
+                <p>Defina tetos de gastos para o cartão, lazer ou mercado. O ChatWallet te avisa no WhatsApp antes de você estourar o limite.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="depoimentos">
+        <div class="section-header reveal">
+            <h2 class="title">Quem usa, recomenda</h2>
+            <p class="subtitle">Junte-se a milhares de pessoas que já transformaram sua relação com o dinheiro.</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="testimonial-card reveal">
+                <div class="stars">★★★★★</div>
+                <p>"Eu tentava usar planilhas e apps complicados, mas sempre esquecia de anotar. Com o ChatWallet ficou impossível esquecer, já que o WhatsApp tá sempre aberto."</p>
+                <div class="user-info">
+                    <div class="avatar">R</div>
+                    <div>
+                        <strong>Rafael C.</strong>
+                        <div style="font-size: 12px; color: var(--text-muted);">Desenvolvedor</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="stars">★★★★★</div>
+                <p>"Mandar a foto da nota do mercado e ver ele categorizando sozinho é mágica! Economiza muito o meu tempo e me mantém dentro do orçamento."</p>
+                <div class="user-info">
+                    <div class="avatar">M</div>
+                    <div>
+                        <strong>Mariana S.</strong>
+                        <div style="font-size: 12px; color: var(--text-muted);">Arquiteta</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="stars">★★★★★</div>
+                <p>"O recurso de gerar o relatório em PDF direto pelo chat salva a minha vida na hora de organizar as contas de casa com meu marido."</p>
+                <div class="user-info">
+                    <div class="avatar">L</div>
+                    <div>
+                        <strong>Letícia F.</strong>
+                        <div style="font-size: 12px; color: var(--text-muted);">Empresária</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="faq">
+        <div class="section-header reveal">
+            <h2 class="title">Perguntas Frequentes</h2>
+            <p class="subtitle">Tire suas dúvidas e comece a controlar suas finanças hoje mesmo.</p>
+        </div>
+
+        <div class="faq-container reveal">
+            <div class="faq-item">
+                <button class="faq-question">
+                    Como funciona a segurança dos meus dados?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>O ChatWallet utiliza infraestrutura em nuvem isolada e não pede senhas de bancos. Suas informações financeiras são associadas apenas ao seu número e nós não vendemos dados para terceiros. O WhatsApp garante a criptografia de ponta a ponta na transmissão das mensagens e imagens.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    O ChatWallet conecta com meu banco?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Não. Acreditamos no controle consciente. O ChatWallet funciona via lançamento manual e instantâneo por você (texto, áudio ou foto). Isso cria o hábito saudável de ter consciência sobre cada gasto, sem expor suas credenciais bancárias.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Posso usar o ChatWallet no plano gratuito para sempre?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Sim! O plano básico permite que você registre despesas, verifique saldos e acompanhe suas finanças pelo WhatsApp de forma totalmente gratuita, com um limite mensal generoso de mensagens. Para relatórios em PDF, leitura de recibos ilimitada e recursos avançados, temos a opção Premium.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal" style="text-align: center;">
+        <h2 class="title" style="font-size: 3rem; margin-bottom: 30px;">Pronto para assumir o controle?</h2>
+        <a href="https://wa.me/5599999999999" class="btn" style="padding: 20px 40px; font-size: 1.2rem;">Chamar no WhatsApp Agora</a>
+    </section>
+
+    <footer>
+        <p>© 2026 ChatWallet. Uma plataforma focada em liberdade financeira.</p>
+        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 20px;">
+            <a href="#" style="color: var(--text-muted); text-decoration: none; font-size: 14px;">Termos de Uso</a>
+            <a href="#" style="color: var(--text-muted); text-decoration: none; font-size: 14px;">Privacidade</a>
+        </div>
+    </footer>
+
+    <script>
+        // Script para animação de scroll (Reveal)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                // Ajusta o disparo para quando o elemento estiver 150px visível na tela
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150; 
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Executar na carga da página
+
+        // Script para o FAQ Expansível (Accordion)
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const btn = item.querySelector('.faq-question');
+            btn.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                // Fechar todos
+                faqItems.forEach(i => i.classList.remove('active'));
+                // Abrir o clicado se não estava aberto
+                if(!isActive) item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
