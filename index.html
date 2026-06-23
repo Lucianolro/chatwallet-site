@@ -40,6 +40,16 @@
             overflow-x: hidden;
         }
 
+        /* Ajuste do tamanho para maior visibilidade */
+        .mockup-logo {
+            width: 50px;       /* Aumentado de 35px para 50px */
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.4); /* Borda levemente mais grossa */
+            background-color: white; /* Garante que a logo tenha fundo caso seja PNG transparente */
+        }
+
         /* HEADER & NAVBAR */
         header {
             position: fixed;
@@ -168,7 +178,6 @@
             justify-content: center;
         }
 
-        /* Flutuação suave para o Hero e Mockups */
         .mockup-hero { animation: floatPhone 6s ease-in-out infinite; }
         
         .phone-inner {
@@ -191,11 +200,12 @@
         .phone-header {
             background: #075E54;
             color: white;
-            padding: 40px 20px 15px;
+            padding: 30px 15px 15px 15px; /* Ajuste no padding para o header não ficar muito grande */
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px; /* Aumentamos o espaço entre a logo e o texto */
+            font-size: 1.1rem; /* Aumentamos um pouco a fonte do nome */
         }
 
         .phone-header::before {
@@ -246,12 +256,10 @@
             border-top-left-radius: 5px;
         }
 
-        /* As mensagens só animam quando a seção (.reveal.active) entra na tela */
         .reveal.active .bubble {
             animation: chatBounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* Delays para parecer que estão conversando */
         .reveal.active .d-1 { animation-delay: 0.5s; }
         .reveal.active .d-2 { animation-delay: 1.8s; }
         .reveal.active .d-3 { animation-delay: 3.2s; }
@@ -261,7 +269,6 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Elementos Especiais no Chat (Áudio e Imagem) */
         .audio-message {
             display: flex;
             align-items: center;
@@ -288,7 +295,6 @@
             position: relative;
             overflow: hidden;
         }
-        /* Animação da barra de áudio (opcional) */
         .reveal.active .audio-wave::after {
             content: '';
             position: absolute;
@@ -298,7 +304,7 @@
             width: 0%;
             background: #25D366;
             border-radius: 2px;
-            animation: playAudio 1.3s linear forwards 0.5s; /* Toca junto com a msg do user */
+            animation: playAudio 1.3s linear forwards 0.5s;
         }
         @keyframes playAudio { to { width: 100%; } }
 
@@ -315,7 +321,6 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
-        /* SECTIONS GENERAL */
         .section {
             padding: 100px 20px;
             max-width: 1200px;
@@ -341,7 +346,6 @@
             margin: auto;
         }
 
-        /* GRID SHOWCASE (3 PHONES) COM MOVIMENTOS */
         .phones-showcase {
             display: flex;
             justify-content: center;
@@ -357,7 +361,6 @@
             position: relative;
         }
 
-        /* Cada container flutua em um ritmo diferente */
         .phones-showcase .phone-wrapper:nth-child(1) { animation: floatPhone 6s ease-in-out infinite 0s; }
         .phones-showcase .phone-wrapper:nth-child(2) { animation: floatPhone 6s ease-in-out infinite 2s; }
         .phones-showcase .phone-wrapper:nth-child(3) { animation: floatPhone 6s ease-in-out infinite 4s; }
@@ -368,7 +371,6 @@
             100% { transform: translateY(0px); }
         }
 
-        /* Efeito Hover: O celular salta pra frente e brilha */
         .phones-showcase .phone-wrapper .phone-inner:hover .phone {
             transform: scale(1.03) translateY(-10px);
             box-shadow: 0 30px 60px rgba(59, 130, 246, 0.25), inset 0 0 0 4px #000;
@@ -386,7 +388,6 @@
             z-index: 10;
         }
 
-        /* FEATURES CARDS */
         .grid-features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -432,7 +433,6 @@
             line-height: 1.6;
         }
 
-        /* DEPOIMENTOS */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -466,7 +466,6 @@
             font-weight: bold;
         }
 
-        /* FAQ EXPANSÍVEL */
         .faq-container {
             max-width: 800px;
             margin: auto;
@@ -519,7 +518,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* FOOTER */
         footer {
             border-top: 1px solid var(--border);
             padding: 40px 20px;
@@ -528,7 +526,6 @@
             margin-top: 60px;
         }
 
-        /* ANIMATION CLASSES FOR SCROLL */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -540,7 +537,6 @@
             transform: translateY(0);
         }
 
-        /* RESPONSIVE */
         @media(max-width: 992px) {
             .hero { grid-template-columns: 1fr; text-align: center; padding-top: 120px; }
             .hero-content h1 { font-size: 3rem; }
@@ -586,7 +582,7 @@
             <div class="phone-inner">
                 <div class="phone">
                     <div class="phone-header">
-                        <div style="width: 35px; height: 35px; background: #fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; color:#075E54; font-weight:bold; font-size: 18px;">C</div>
+                        <img src="logo-chatwallet.png" alt="ChatWallet" class="mockup-logo">
                         ChatWallet IA
                     </div>
                     <div class="chat-area">
@@ -602,7 +598,6 @@
         </div>
     </section>
 
-    <!-- SEÇÃO: 3 MOCKUPS COM ANIMAÇÕES INDEPENDENTES E EFEITOS DE HOVER -->
     <section class="section" id="pratica" style="background: rgba(17, 24, 39, 0.5);">
         <div class="section-header reveal">
             <h2 class="title">Tão simples quanto mandar mensagem</h2>
@@ -611,12 +606,14 @@
 
         <div class="phones-showcase reveal">
             
-            <!-- Mockup 1: Áudio -->
             <div class="phone-wrapper">
                 <div class="phone-label">🎙️ Por Áudio</div>
                 <div class="phone-inner">
                     <div class="phone">
-                        <div class="phone-header">ChatWallet IA</div>
+                        <div class="phone-header">
+                            <img src="logo-chatwallet.png" alt="ChatWallet" class="mockup-logo">
+                            ChatWallet IA
+                        </div>
                         <div class="chat-area">
                             <div class="bubble user d-1">
                                 <div class="audio-message">
@@ -635,12 +632,14 @@
                 </div>
             </div>
 
-            <!-- Mockup 2: Imagem/Recibo (Destaque Central) -->
             <div class="phone-wrapper">
                 <div class="phone-label" style="background: var(--primary); color: white; border:none;">📸 Por Foto do Recibo</div>
                 <div class="phone-inner">
                     <div class="phone" style="z-index: 10;">
-                        <div class="phone-header">ChatWallet IA</div>
+                        <div class="phone-header">
+                            <img src="logo-chatwallet.png" alt="ChatWallet" class="mockup-logo">
+                            ChatWallet IA
+                        </div>
                         <div class="chat-area">
                             <div class="bubble user d-1" style="padding: 5px;">
                                 <div class="image-message">Recibo Supermercado</div>
@@ -657,12 +656,14 @@
                 </div>
             </div>
 
-            <!-- Mockup 3: Texto -->
             <div class="phone-wrapper">
                 <div class="phone-label">✍️ Por Texto</div>
                 <div class="phone-inner">
                     <div class="phone">
-                        <div class="phone-header">ChatWallet IA</div>
+                        <div class="phone-header">
+                            <img src="logo-chatwallet.png" alt="ChatWallet" class="mockup-logo">
+                            ChatWallet IA
+                        </div>
                         <div class="chat-area">
                             <div class="bubble user d-1">Assinei a Netflix por 39,90</div>
                             <div class="bubble bot d-2">
@@ -678,7 +679,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -687,28 +687,11 @@
             <h2 class="title">Recursos Nível Premium</h2>
             <p class="subtitle">O poder de um aplicativo de gestão financeira completo, sem precisar baixar nada.</p>
         </div>
-
         <div class="grid-features">
-            <div class="feature-card reveal">
-                <div class="feature-icon">📸</div>
-                <h3>Leitura de Recibos</h3>
-                <p>Tirou foto da nota fiscal? Envie no chat e nossa IA extrai o valor, o estabelecimento e a categoria automaticamente para você.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon">🎙️</div>
-                <h3>Reconhecimento de Áudio</h3>
-                <p>Está na rua com pressa? Mande um áudio dizendo "gastei 50 de gasolina" e nossa IA transcreve e registra na hora.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon">📊</div>
-                <h3>Dashboards em PDF</h3>
-                <p>Peça o seu resumo mensal e receba no mesmo instante um PDF lindo e detalhado com gráficos de para onde o seu dinheiro foi.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon">🎯</div>
-                <h3>Alertas de Metas</h3>
-                <p>Defina tetos de gastos para o cartão, lazer ou mercado. O ChatWallet te avisa no WhatsApp antes de você estourar o limite.</p>
-            </div>
+            <div class="feature-card reveal"><div class="feature-icon">📸</div><h3>Leitura de Recibos</h3><p>Tirou foto da nota fiscal? Envie no chat e nossa IA extrai o valor, o estabelecimento e a categoria automaticamente para você.</p></div>
+            <div class="feature-card reveal"><div class="feature-icon">🎙️</div><h3>Reconhecimento de Áudio</h3><p>Está na rua com pressa? Mande um áudio dizendo "gastei 50 de gasolina" e nossa IA transcreve e registra na hora.</p></div>
+            <div class="feature-card reveal"><div class="feature-icon">📊</div><h3>Dashboards em PDF</h3><p>Peça o seu resumo mensal e receba no mesmo instante um PDF lindo e detalhado com gráficos de para onde o seu dinheiro foi.</p></div>
+            <div class="feature-card reveal"><div class="feature-icon">🎯</div><h3>Alertas de Metas</h3><p>Defina tetos de gastos para o cartão, lazer ou mercado. O ChatWallet te avisa no WhatsApp antes de você estourar o limite.</p></div>
         </div>
     </section>
 
@@ -717,123 +700,46 @@
             <h2 class="title">Quem usa, recomenda</h2>
             <p class="subtitle">Junte-se a milhares de pessoas que já transformaram sua relação com o dinheiro.</p>
         </div>
-
         <div class="grid-3">
-            <div class="testimonial-card reveal">
-                <div class="stars">★★★★★</div>
-                <p>"Eu tentava usar planilhas e apps complicados, mas sempre esquecia de anotar. Com o ChatWallet ficou impossível esquecer, já que o WhatsApp tá sempre aberto."</p>
-                <div class="user-info">
-                    <div class="avatar">R</div>
-                    <div>
-                        <strong>Rafael C.</strong>
-                        <div style="font-size: 12px; color: var(--text-muted);">Desenvolvedor</div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card reveal">
-                <div class="stars">★★★★★</div>
-                <p>"Mandar a foto da nota do mercado e ver ele categorizando sozinho é mágica! Economiza muito o meu tempo e me mantém dentro do orçamento."</p>
-                <div class="user-info">
-                    <div class="avatar">M</div>
-                    <div>
-                        <strong>Mariana S.</strong>
-                        <div style="font-size: 12px; color: var(--text-muted);">Arquiteta</div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card reveal">
-                <div class="stars">★★★★★</div>
-                <p>"O recurso de gerar o relatório em PDF direto pelo chat salva a minha vida na hora de organizar as contas de casa com meu marido."</p>
-                <div class="user-info">
-                    <div class="avatar">L</div>
-                    <div>
-                        <strong>Letícia F.</strong>
-                        <div style="font-size: 12px; color: var(--text-muted);">Empresária</div>
-                    </div>
-                </div>
-            </div>
+            <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p>"Eu tentava usar planilhas e apps complicados, mas sempre esquecia de anotar. Com o ChatWallet ficou impossível esquecer, já que o WhatsApp tá sempre aberto."</p><div class="user-info"><div class="avatar">R</div><div><strong>Rafael C.</strong><div style="font-size: 12px; color: var(--text-muted);">Desenvolvedor</div></div></div></div>
+            <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p>"Mandar a foto da nota do mercado e ver ele categorizando sozinho é mágica! Economiza muito o meu tempo e me mantém dentro do orçamento."</p><div class="user-info"><div class="avatar">M</div><div><strong>Mariana S.</strong><div style="font-size: 12px; color: var(--text-muted);">Arquiteta</div></div></div></div>
+            <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p>"O recurso de gerar o relatório em PDF direto pelo chat salva a minha vida na hora de organizar as contas de casa com meu marido."</p><div class="user-info"><div class="avatar">L</div><div><strong>Letícia F.</strong><div style="font-size: 12px; color: var(--text-muted);">Empresária</div></div></div></div>
         </div>
     </section>
 
     <section class="section" id="faq">
         <div class="section-header reveal">
             <h2 class="title">Perguntas Frequentes</h2>
-            <p class="subtitle">Tire suas dúvidas e comece a controlar suas finanças hoje mesmo.</p>
         </div>
-
         <div class="faq-container reveal">
-            <div class="faq-item">
-                <button class="faq-question">
-                    Como funciona a segurança dos meus dados?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>O ChatWallet utiliza infraestrutura em nuvem isolada e não pede senhas de bancos. Suas informações financeiras são associadas apenas ao seu número e nós não vendemos dados para terceiros. O WhatsApp garante a criptografia de ponta a ponta na transmissão das mensagens e imagens.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question">
-                    O ChatWallet conecta com meu banco?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Não. Acreditamos no controle consciente. O ChatWallet funciona via lançamento manual e instantâneo por você (texto, áudio ou foto). Isso cria o hábito saudável de ter consciência sobre cada gasto, sem expor suas credenciais bancárias.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    Posso usar o ChatWallet no plano gratuito para sempre?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Sim! O plano básico permite que você registre despesas, verifique saldos e acompanhe suas finanças pelo WhatsApp de forma totalmente gratuita, com um limite mensal generoso de mensagens. Para relatórios em PDF, leitura de recibos ilimitada e recursos avançados, temos a opção Premium.</p>
-                </div>
-            </div>
+            <div class="faq-item"><button class="faq-question">Como funciona a segurança dos meus dados?<span class="faq-icon">+</span></button><div class="faq-answer"><p>O ChatWallet utiliza infraestrutura em nuvem isolada e não pede senhas de bancos. Suas informações financeiras são associadas apenas ao seu número e nós não vendemos dados para terceiros.</p></div></div>
+            <div class="faq-item"><button class="faq-question">O ChatWallet conecta com meu banco?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Não. Acreditamos no controle consciente através de lançamento manual e instantâneo por você.</p></div></div>
+            <div class="faq-item"><button class="faq-question">Posso usar o ChatWallet no plano gratuito para sempre?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Não! Oferecemos um período de teste de <b>7 dias gratuitos</b> para você experimentar todos os recursos da nossa Inteligência Financeira. Após esse período, você pode escolher o plano que melhor atende às suas necessidades</p></div></div>
         </div>
-    </section>
-
-    <section class="section reveal" style="text-align: center;">
-        <h2 class="title" style="font-size: 3rem; margin-bottom: 30px;">Pronto para assumir o controle?</h2>
-        <a href="https://wa.me/5599999999999" class="btn" style="padding: 20px 40px; font-size: 1.2rem;">Chamar no WhatsApp Agora</a>
     </section>
 
     <footer>
         <p>© 2026 ChatWallet. Uma plataforma focada em liberdade financeira.</p>
-        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 20px;">
-            <a href="#" style="color: var(--text-muted); text-decoration: none; font-size: 14px;">Termos de Uso</a>
-            <a href="#" style="color: var(--text-muted); text-decoration: none; font-size: 14px;">Privacidade</a>
-        </div>
     </footer>
 
     <script>
-        // Script para animação de scroll (Reveal)
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
-                // Ajusta o disparo para quando o elemento estiver 150px visível na tela
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150; 
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
+                if (elementTop < windowHeight - 150) { reveals[i].classList.add("active"); }
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal(); // Executar na carga da página
+        reveal();
 
-        // Script para o FAQ Expansível (Accordion)
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const btn = item.querySelector('.faq-question');
             btn.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                // Fechar todos
                 faqItems.forEach(i => i.classList.remove('active'));
-                // Abrir o clicado se não estava aberto
                 if(!isActive) item.classList.add('active');
             });
         });
